@@ -1,6 +1,8 @@
 import express, {Application, NextFunction, Request, Response} from 'express';
 import {HttpException} from "./exceptions/HttpException"
 import mongoose from "mongoose"
+import cors from "cors"
+
 import user from "./user/router"
 import bodyParser from "body-parser";
 
@@ -15,6 +17,7 @@ mongoose.connect(`mongodb://localhost:27017/${config.database}`,  {
 
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
+server.use(cors());
 
 server.use("/users", user);
 
